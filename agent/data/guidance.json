@@ -1,0 +1,16 @@
+{
+  "version": "nalamnes-v1",
+  "note": "NalamNest guidance data. The agent reads from care_data.json (which contains the guidance section). This file is kept for compatibility with the generic starter but is not loaded by agent/tools.py. All guidance IDs are in care_data.json under the 'guidance' key.",
+  "sources": {
+    "WHO-CARE": "WHO, Caring for the elderly at home — caregiver guide, who.int/ageing, read 27 Oct 2026",
+    "AIIMS-GERIATRIC": "AIIMS Geriatrics OPD patient handout — general follow-up guidance, aiims.edu, read 27 Oct 2026",
+    "TNHEALTH-108": "Tamil Nadu health emergency number 108 (EMRI), tnhealth.org, read 27 Oct 2026"
+  },
+  "items": [
+    {"id": "G-FOLLOWUP", "source": "AIIMS-GERIATRIC", "text": "Bring all previous reports, prescriptions and a list of current medications to every follow-up appointment."},
+    {"id": "G-CHECKLIST", "source": "WHO-CARE", "text": "Before a doctor visit, prepare: patient name and age, list of symptoms or concerns, current medications with dosages (as prescribed), recent test results, and any questions for the doctor."},
+    {"id": "G-EMERGENCY", "source": "TNHEALTH-108", "text": "For medical emergencies in Tamil Nadu, call 108 (EMRI ambulance service, free, available 24x7)."},
+    {"id": "G-DOCUMENT", "source": "WHO-CARE", "text": "Keep a folder with discharge summaries, lab reports and prescription records. Bring it to every appointment."},
+    {"id": "G-TASK", "source": "WHO-CARE", "text": "Assign care tasks clearly: who will accompany the patient, who will collect reports, and who will follow up with the doctor."}
+  ]
+}

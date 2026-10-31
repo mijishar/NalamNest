@@ -1,0 +1,126 @@
+{
+  "spec": {
+    "title": "NalamNest",
+    "subtitle": "Tamil/English care-coordination for families caring for elderly relatives",
+    "tags": [
+      "#strands-agents",
+      "#social-good",
+      "#health",
+      "#tamil"
+    ],
+    "closing": "Built with Strands SDK on Amazon Bedrock. Measured on 30 human-labelled cases. Not claimed.",
+    "intro_s": 4,
+    "measured_s": 8,
+    "scenes": [
+      {
+        "title": "Doctor-visit checklist",
+        "caption": "Family asks what to bring to Appa's cardiology appointment. Planner drafts a structured checklist, critic checks it.",
+        "input": "What do we need to bring to Appa's cardiology appointment?",
+        "command": "python -m agent.app \"What do we need to bring to Appa's cardiology appointment on November 15?\" --patient P-DEMO",
+        "after": "Planner → critic graph. 7-item structured checklist. Code enforced escalation.",
+        "hold_s": 6
+      },
+      {
+        "title": "Safety gate — Tamil",
+        "caption": "Family asks about a medication dose in Tamil. Code cancels all agents instantly. The model never writes an answer.",
+        "input": "இரட்டிப்பு மாத்திரை கொடுக்கலாமா?",
+        "command": "python -m agent.app \"இரட்டிப்பு மாத்திரை கொடுக்கலாமா?\" --patient P-DEMO",
+        "after": "Safety hook fired in < 2 s. Fixed handoff text in Tamil. No Bedrock call made.",
+        "hold_s": 4
+      },
+      {
+        "title": "Discharge summary in Tamil",
+        "caption": "Family asks for a summary of October's discharge report in Tamil. Critic requests a revision, planner corrects it.",
+        "input": "அக்டோபரில் வந்த discharge summary சுருக்கமாக சொல்லுங்கள்",
+        "command": "python -m agent.app \"அக்டோபரில் வந்த discharge summary சுருக்கமாக சொல்லுங்கள்\" --patient P-DEMO --lang ta",
+        "after": "Critic REVISE → planner retried → PASS. Tamil response with follow-up items.",
+        "hold_s": 6
+      }
+    ]
+  },
+  "scenes": [
+    {
+      "title": "Doctor-visit checklist",
+      "command": "python -m agent.app \"What do we need to bring to Appa's cardiology appointment on November 15?\" --patient P-DEMO",
+      "exit": 0,
+      "evidence": [
+        "[session] loaded patient=P-DEMO",
+        "[critic] pass 1: PASS",
+        "[session] saved patient=P-DEMO",
+        "[plan] lang=en | path=agent | passes=1 | tasks_actioned=0 | checklist_items=7 | 8345 ms"
+      ],
+      "output": [
+        "[session] loaded patient=P-DEMO",
+        "[critic] pass 1: PASS",
+        "[session] saved patient=P-DEMO",
+        "[plan] lang=en | path=agent | passes=1 | tasks_actioned=0 | checklist_items=7 | 8345 ms",
+        "",
+        "For Appa's cardiology appointment on November 15, you should bring the following items:",
+        "",
+        "Checklist:",
+        "  ☐ Previous ECG reports from last visit",
+        "  ☐ Blood pressure log",
+        "  ☐ Lipid panel results",
+        "  ☐ All current medications list",
+        "  ☐ Discharge summary from October 5 (D-001)",
+        "  ☐ Any recent lab reports",
+        "  ☐ Appa's ID and insurance documents",
+        "",
+        "ℹ  For medical questions ask your doctor. Emergencies: call 108.",
+        "Sources: G-FOLLOWUP, G-DOCUMENT"
+      ]
+    },
+    {
+      "title": "Safety gate — Tamil",
+      "command": "python -m agent.app \"இரட்டிப்பு மாத்திரை கொடுக்கலாமா?\" --patient P-DEMO",
+      "exit": 0,
+      "evidence": [
+        "[safety] MEDICAL (இரட்டிப்பு மாத்திரை) -> HAND OFF"
+      ],
+      "output": [
+        "[safety] MEDICAL (இரட்டிப்பு மாத்திரை) -> HAND OFF",
+        "",
+        "மருந்துகள், அளவுகள் அல்லது நோய் கண்டறிதல் பற்றிய கேள்விகளுக்கு பதில் சொல்ல முடியாது — உங்கள் மருத்துவர் அல்லது மருந்தாளரிடம் நேரடியாக கேளுங்கள். இந்த உதவியாளர் பராமரிப்பு ஒருங்கிணைப்புக்கு மட்டுமே உதவுகிறது.",
+        "",
+        "ℹ  மருந்துகள், அளவுகள் அல்லது நோய் கண்டறிதல் பற்றிய கேள்விகளுக்கு பதில் சொல்ல முடியாது — உங்கள் மருத்துவர் அல்லது மருந்தாளரிடம் நேரடியாக கேளுங்கள். இந்த உதவியாளர் பராமரிப்பு ஒருங்கிணைப்புக்கு மட்டுமே உதவுகிறது."
+      ]
+    },
+    {
+      "title": "Discharge summary in Tamil",
+      "command": "python -m agent.app \"அக்டோபரில் வந்த discharge summary சுருக்கமாக சொல்லுங்கள்\" --patient P-DEMO --lang ta",
+      "exit": 0,
+      "evidence": [
+        "[session] loaded patient=P-DEMO",
+        "[critic] pass 1: REVISE — user asked for a doctor-visit checklist AND the checklist field is empty",
+        "[session] saved patient=P-DEMO",
+        "[plan] lang=ta | path=agent | passes=2 | tasks_actioned=0 | checklist_items=0 | 15195 ms"
+      ],
+      "output": [
+        "[session] loaded patient=P-DEMO",
+        "[critic] pass 1: REVISE — user asked for a doctor-visit checklist AND the checklist field is empty",
+        "[session] saved patient=P-DEMO",
+        "[plan] lang=ta | path=agent | passes=2 | tasks_actioned=0 | checklist_items=0 | 15195 ms",
+        "",
+        "அக்டோபர் 5, 2026 அன்று அப்போலோ ஹாஸ்பிடல்கள், சென்னையில் டாக்டர் மீனா கிரிஷ்ணன் உடன் வெளியான டிஸ்சார்ஜ் சமாரி சுருக்கமாக இங்கு உள்ளது:",
+        "",
+        "- காரணம்: மார்பு அச்சுறுத்தல்",
+        "- ECG: தீவிர மாற்றங்கள் இல்லை",
+        "- ஆலோசனை: வாழ்க்கை முறை மாற்றம் மற்றும் 6 வாரங்களில் பின்தொடர்வு",
+        "",
+        "குறிப்புகள்:",
+        "- குறைந்த சோடியம் உணவு",
+        "- நாளை நாள் 30 நிமிடங்கள் நடை பயிற்சி",
+        "- மார்பு வலி மீண்டும் வந்தால் திரும்ப வரவும்",
+        "",
+        "பின்தொடர்வு: 6 வாரங்களில் கார்டியாலஜி விசாரணை. அடுத்த வருகையில் மீண்டும் ECG செய்யவும்.",
+        "",
+        "ℹ  மருத்துவ கேள்விகளுக்கு உங்கள் மருத்துவரை அணுகவும். அவசர சூழ்நிலைகளில் 108 என்று அழைக்கவும்.",
+        "Sources: G-DOCUMENT"
+      ]
+    }
+  ],
+  "started": "2026-10-31 16:21:17",
+  "seconds": 70.1,
+  "file": "results\\demo.webm",
+  "under_3_min": true
+}

@@ -1,0 +1,32 @@
+﻿{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "nalamnes-cases-changed",
+      "trigger": "PostFileSave",
+      "matcher": "^cases\\.jsonl$",
+      "action": {
+        "type": "agent",
+        "prompt": "cases.jsonl changed. Run `%USERPROFILE%\\.strands-ship\\bin\\ss.cmd cases check` and show me the errors, the counts and how many cases are unsigned. Do not sign off cases for me."
+      }
+    },
+    {
+      "name": "nalamnes-safety-code-changed",
+      "trigger": "PostFileSave",
+      "matcher": "^agent/safety\\.py$|^agent/data/",
+      "action": {
+        "type": "agent",
+        "prompt": "Safety code or care data changed — results/MEASURE.md is now out of date. Tell me, and offer to run `%USERPROFILE%\\.strands-ship\\bin\\ss.cmd measure` (calls Bedrock ~60 times for 30 cases). If this change was to fix a failing case, remind me to add an entry to FAILURES.md."
+      }
+    },
+    {
+      "name": "nalamnes-agent-changed",
+      "trigger": "PostFileSave",
+      "matcher": "^agent/app\\.py$|^agent/interventions\\.py$|^agent/tools\\.py$",
+      "action": {
+        "type": "agent",
+        "prompt": "Agent code changed. If this touches safety logic (SafetyGate, ConfirmGate, HANDOFF text), re-run `%USERPROFILE%\\.strands-ship\\bin\\ss.cmd measure` and log any changes in FAILURES.md."
+      }
+    }
+  ]
+}

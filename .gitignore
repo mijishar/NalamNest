@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+results/_raw/
+*.webm
+agent/data/sessions/
+*.pyc
+.env

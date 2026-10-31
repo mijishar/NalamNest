@@ -1,0 +1,14 @@
+# Run this agent without the power: python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
+# Pins tested 26 Oct 2026 on macOS (Apple silicon), Python 3.12, Amazon Bedrock us-east-1.
+strands-agents==1.62.0
+strands-agents-tools==0.8.10
+strands-agents-evals==1.7.0
+strands-harness==0.3.2
+strands-shell==0.5.0
+boto3==1.43.118
+pydantic==2.14.1
+# Only for `ss video` (records the demo):
+playwright==1.63.0
+# Optional, only for the blocks that use them:
+#   voice:   pip install "strands-agents[bidi,bidi-io,bidi-pyaudio,bidi-aec]" (and brew install portaudio)
+#   decider: hosted (no install, DECIDER_API_KEY from awsugmdu.in) or pip install strands-decider==0.2.0 (PyTorch)

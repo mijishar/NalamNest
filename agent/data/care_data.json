@@ -1,0 +1,106 @@
+{
+  "version": "synthetic-demo-v1",
+  "note": "ALL DATA IS SYNTHETIC. No real patient information. Replace with real anonymised data before any non-demo use.",
+  "sources": {
+    "WHO-CARE": "WHO, Caring for the elderly at home — caregiver guide, who.int/ageing, read 27 Oct 2026",
+    "AIIMS-GERIATRIC": "AIIMS Geriatrics OPD patient handout — general follow-up guidance, aiims.edu, read 27 Oct 2026",
+    "TNHEALTH-108": "Tamil Nadu health emergency number 108 (EMRI), tnhealth.org, read 27 Oct 2026"
+  },
+  "patients": [
+    {
+      "id": "P-DEMO",
+      "name": "Appa (Demo)",
+      "age": 72,
+      "conditions": [
+        "Type 2 Diabetes",
+        "Hypertension"
+      ],
+      "note": "Synthetic demo patient. Not a real person."
+    }
+  ],
+  "appointments": [
+    {
+      "id": "A-001",
+      "patient_id": "P-DEMO",
+      "doctor": "Dr. Meena Krishnan",
+      "specialty": "Cardiology",
+      "date": "2026-11-15",
+      "time": "10:30",
+      "location": "Apollo Hospitals Chennai",
+      "notes": "Annual cardiac review. Bring ECG reports from last visit.",
+      "follow_up_items": [
+        "Check blood pressure log",
+        "Review lipid panel results"
+      ]
+    },
+    {
+      "id": "A-002",
+      "patient_id": "P-DEMO",
+      "doctor": "Dr. Ramesh Iyer",
+      "specialty": "Endocrinology",
+      "date": "2026-11-22",
+      "time": "09:00",
+      "location": "Government General Hospital",
+      "notes": "Diabetes quarterly review.",
+      "follow_up_items": [
+        "Bring HbA1c results",
+        "Blood sugar log for past 3 months"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "id": "D-001",
+      "patient_id": "P-DEMO",
+      "type": "Discharge Summary",
+      "date": "2026-10-05",
+      "hospital": "Apollo Hospitals Chennai",
+      "doctor": "Dr. Meena Krishnan",
+      "summary": "Admitted for chest discomfort. ECG showed no acute changes. Advised lifestyle modification and follow-up in 6 weeks.",
+      "instructions": [
+        "Low-sodium diet",
+        "30 minutes walking daily",
+        "Return if chest pain recurs"
+      ],
+      "follow_up": "Cardiology review in 6 weeks. Repeat ECG at next visit.",
+      "note": "This is a synthetic document summary. It does not represent medical advice."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T-1793286452",
+      "description": "Collect Appa ECG report",
+      "due_date": "",
+      "assigned_to": "",
+      "status": "open"
+    }
+  ],
+  "reminders": [],
+  "guidance": [
+    {
+      "id": "G-FOLLOWUP",
+      "source": "AIIMS-GERIATRIC",
+      "text": "Bring all previous reports, prescriptions and a list of current medications to every follow-up appointment."
+    },
+    {
+      "id": "G-CHECKLIST",
+      "source": "WHO-CARE",
+      "text": "Before a doctor visit, prepare: patient's name and age, list of symptoms or concerns, current medications with dosages (as prescribed), recent test results, and any questions for the doctor."
+    },
+    {
+      "id": "G-EMERGENCY",
+      "source": "TNHEALTH-108",
+      "text": "For medical emergencies in Tamil Nadu, call 108 (EMRI ambulance service, free, available 24x7)."
+    },
+    {
+      "id": "G-DOCUMENT",
+      "source": "WHO-CARE",
+      "text": "Keep a folder with discharge summaries, lab reports and prescription records. Bring it to every appointment."
+    },
+    {
+      "id": "G-TASK",
+      "source": "WHO-CARE",
+      "text": "Assign care tasks clearly: who will accompany the patient, who will collect reports, and who will follow up with the doctor."
+    }
+  ]
+}
